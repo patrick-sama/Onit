@@ -9,9 +9,6 @@ namespace Onit.Models
 {
     public class ComponenteDelCarello
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public int Qty { get; set; }
 

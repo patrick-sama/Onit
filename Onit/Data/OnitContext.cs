@@ -29,5 +29,7 @@ namespace Onit.Data
 
         public DbSet<Onit.Models.Locazione> Locazioni { get; set; }
 
+        public DbSet<Onit.Models.Arrivi> Arrivi { get; set; }
+
     }
 }

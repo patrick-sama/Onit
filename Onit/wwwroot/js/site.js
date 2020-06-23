@@ -10,3 +10,10 @@ function LoadLocazione(element) {
         })
     }
 }
+
+
+function Prova() {
+    $(function () {
+        $("#createComponent").modal();
+    });
+}
