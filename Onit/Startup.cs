@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Onit.Data;
 
 namespace Onit
 {
@@ -23,6 +25,9 @@ namespace Onit
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<OnitContext>(options =>
+                    options.UseSqlite(Configuration.GetConnectionString("OnitContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

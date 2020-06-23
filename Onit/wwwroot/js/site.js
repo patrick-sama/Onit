@@ -1,4 +1,12 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var Locazioni = [];
+function LoadLocazione(element) {
+    if (Locazioni.length == 0) {
+        $.ajax({
+            type: "GET",
+            url: '/home/getLocazioneArea',
+            success: function (data) {
 
-// Write your JavaScript code.
+            }
+        })
+    }
+}
