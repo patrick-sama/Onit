@@ -182,13 +182,12 @@ C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreap
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponenteDelCarelloes\Details.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponenteDelCarelloes\Edit.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponenteDelCarelloes\Index.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\Create.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\Delete.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\Details.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\Edit.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\Index.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locaziones\Create.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locaziones\Delete.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locaziones\Details.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locaziones\Edit.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locaziones\Index.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\_ViewAll.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\AddOrEdit.cshtml.g.cs
