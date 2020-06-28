@@ -1,4 +1,4 @@
-﻿@model Onit.Models.Arrivi
+﻿@model Onit.Models.CustomArriviViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,8 +10,14 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        @using (Html.BeginForm("SaveArrivi", "Arrivis", FormMethod.Post))
+        {
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Identificativo" class="control-label"></label>
+                <input asp-for="Identificativo" class="form-control" />
+                <span asp-validation-for="Identificativo" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Descrizione" class="control-label"></label>
                 <input asp-for="Descrizione" class="form-control" />
@@ -23,17 +29,24 @@
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CarelloId" class="control-label"></label>
-                <select asp-for="CarelloId" class ="form-control" asp-items="ViewBag.CarelloId"></select>
+                <label asp-for="MatricolaCarello" class="control-label"></label>
+                <input asp-for="MatricolaCarello" class="form-control" />
+                <span asp-validation-for="MatricolaCarello" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LocazioneId" class="control-label"></label>
-                <select asp-for="LocazioneId" class ="form-control" asp-items="ViewBag.LocazioneId"></select>
+                <label asp-for="AreaId" class="control-label"></label>
+                <select asp-for="AreaId" class="form-control" asp-items="ViewBag.AreaId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="CodiceLocazione" class="control-label"></label>
+                <input asp-for="CodiceLocazione" class="form-control" />
+                <span asp-validation-for="CodiceLocazione" class="text-danger"></span>
             </div>
-        </form>
+            <div class="form-group">
+                <input class="btn btn-block  btn-primary" type="submit" value="Submit" />
+            </div>
+
+        }
     </div>
 </div>
 

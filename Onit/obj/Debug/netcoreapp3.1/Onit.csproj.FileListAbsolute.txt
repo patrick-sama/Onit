@@ -161,7 +161,6 @@ C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\bin\Debug\netcoreap
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Onit.csproj.CoreCompileInputs.cache
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Onit.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Onit.csprojAssemblyReference.cache
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Areas\Create.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Areas\Delete.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Areas\Details.cshtml.g.cs
@@ -191,3 +190,6 @@ C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreap
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locaziones\Index.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\_ViewAll.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componentes\AddOrEdit.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Onit.csprojAssemblyReference.cache
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Arrivis\AddComponente.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Arrivis\Insertion.cshtml.g.cs

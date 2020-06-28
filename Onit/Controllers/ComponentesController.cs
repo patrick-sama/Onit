@@ -78,8 +78,8 @@ namespace Onit.Controllers
                             throw;
                         }
                     }
-                    return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Componente.ToList()) });
                 }
+                return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Componente.ToList()) });
             }
             return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEdit", componente) });
         }

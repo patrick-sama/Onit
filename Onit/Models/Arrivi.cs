@@ -10,6 +10,9 @@ namespace Onit.Models
     public class Arrivi
     {
         [Required]
+        public string Identificativo { get; set; }
+
+        [Required]
         public string Descrizione { get; set; }
 
         [Required]

@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Identificativo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Descrizione)
             </th>
             <th>
@@ -31,6 +34,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Identificativo)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Descrizione)
             </td>
             <td>
@@ -40,14 +46,16 @@
                 @Html.DisplayFor(modelItem => item.Carello.Matricola)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Locazione.Codice)
+                Locazione  @Html.DisplayFor(modelItem => item.Locazione.Codice) area @Html.DisplayFor(modelItem => item.Locazione.Area.Codice)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { CarelloId = item.CarelloId, LocazioneId = item.LocazioneId }, "") |
+                @Html.ActionLink("Details", "Details", new { CarelloId = item.CarelloId, LocazioneId = item.LocazioneId }) |
+                @Html.ActionLink("Delete", "Delete", new { CarelloId = item.CarelloId, LocazioneId = item.LocazioneId }) |
+                <a onclick="showInPopup('@Url.Action("Details","Arrivis",new { CarelloId = item.CarelloId, LocazioneId = item.LocazioneId },Context.Request.Scheme)','Details Arrivo') " class="btn btn-info"> Details </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
