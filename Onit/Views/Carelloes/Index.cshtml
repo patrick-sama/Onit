@@ -1,35 +1,64 @@
-﻿@model IEnumerable<Onit.Models.Carello>
+﻿@model IEnumerable<Onit.Models.ComponenteDelCarello>
 
 @{
     ViewData["Title"] = "Index";
+    
 }
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Matricola)
+                @Html.DisplayNameFor(model => model.Qty)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Componente.Codice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Componente.Descrizione)
+            </th>
+            <th colspan="3"> Carelli </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.GroupBy(c => c.Componente)
+                             .Select(q => new { CodiceComponente = q.Key, total = q.Sum(i => i.Qty) , descrizione = q.Key.Descrizione}))
+        {
         <tr>
+            @{
+                var ScoreMatricola = Model.Where(s => s.Componente.Codice == item.CodiceComponente.Codice).ToList();
+                string area = " ";
+                string locazione = " ";
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.Matricola)
+                @Html.DisplayFor(modelItem => item.total)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.CodiceComponente.Codice)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodiceComponente.Descrizione)
+            </td>
+
+            @foreach (var carello in ScoreMatricola)
+            {
+                Arrivi ScoreArrivi = carello.Carello.Arrivi.FirstOrDefault();
+                if (ScoreArrivi != null)
+                {
+                    area = string.IsNullOrEmpty(ScoreArrivi.Locazione.Area.Codice) ? " " : ScoreArrivi.Locazione.Area.Codice;
+                    locazione = string.IsNullOrEmpty(ScoreArrivi.Locazione.Codice) ? " " : ScoreArrivi.Locazione.Codice;
+
+                }
+
+                <td>
+                    @Html.DisplayFor(mod => carello.Carello.Matricola)  [ Qty in stock @carello.Qty] <br />
+                    [AREA STOCK @area] - [locazione @locazione]
+                </td>
+            }
         </tr>
-}
+        }
     </tbody>
 </table>
+

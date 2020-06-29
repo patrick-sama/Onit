@@ -82,7 +82,7 @@ function saveOrder(data) {
         contentType: 'application/json',
         dataType: 'json',
         type: 'POST',
-        url: "/Arrivis/SaveArrivo",
+        url: "/Arrivis/AddComp",
         data: JSON.stringify(data),
         success: function (result) {
             alert(result);
@@ -93,6 +93,8 @@ function saveOrder(data) {
         }
     });
 }
+
+/*
 //Collect Multiple Order List For Pass To Controller
 $("#saveOrder").click(function (e) {
     e.preventDefault();
@@ -123,3 +125,34 @@ $("#saveOrder").click(function (e) {
         console.log(err);
     });
 });
+*/
+
+
+$("#saveOrder").click(function (e) {
+    e.preventDefault();
+    var data;
+
+    $.each($("#detailsTable tbody tr"), function () {
+        data = { "Qty": 2, "CarelloId": 1, "ComponenteId": 1 };
+        JSON.stringify(data);
+        SalvaComponenteCarello(data);
+    });  
+});
+
+//Salva componente del carello 
+function SalvaComponenteCarello(data) {
+    return $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        type: 'POST',
+        url: '/Arrivis/json/',
+        data: JSON.stringify(data),
+        success: function (result) {
+            alert(result);
+            location.reload();
+        },
+        error: function () {
+            console.log(data);
+        }
+    });
+}

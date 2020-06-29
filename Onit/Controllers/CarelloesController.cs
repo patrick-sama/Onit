@@ -22,7 +22,16 @@ namespace Onit.Controllers
         // GET: Carelloes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Carelli.ToListAsync());
+            ViewBag.Locazione = await _context.Arrivi.Include(a => a.Carello)
+                                                    .Include(a => a.Locazione)
+                                                    .Include(a => a.Locazione.Area).ToListAsync();
+            var carelli = await _context.ComponentiDeiCarelli
+                        .Include(c=>c.Componente)
+                        .Include(c => c.Carello)
+                        .Include(s=>s.Carello.Arrivi)                       
+                        .ToListAsync(); 
+          
+            return View(carelli);
         }
 
         // GET: Carelloes/Details/5

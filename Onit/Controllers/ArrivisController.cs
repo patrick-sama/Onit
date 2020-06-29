@@ -218,9 +218,25 @@ namespace Onit.Controllers
             return View();
         }
 
+        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddComponente([Bind("Qty,CarelloId,ComponenteId")] ComponenteDelCarello componenteDelCarello)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(componenteDelCarello);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CarelloId"] = new SelectList(_context.Carelli, "Id", "Matricola", componenteDelCarello.CarelloId);
+            ViewData["ComponenteId"] = new SelectList(_context.Componente, "Id", "Codice", componenteDelCarello.ComponenteId);
+            return View(componenteDelCarello);
+        } */
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> json(ComponenteDelCarello componenteDelCarello)
         {
             if (ModelState.IsValid)
             {
@@ -245,6 +261,7 @@ namespace Onit.Controllers
                                                       }), "Id", "FullName");
             var areaList = _context.Aree.ToList();
             ViewData["AreaId"] = new SelectList(areaList, "Id", "Codice");
+            ViewData["ComponenteId"] = new SelectList(_context.Componente, "Codice", "Codice");
             return View();
         }
 
