@@ -7,7 +7,8 @@ namespace Onit.Models
 {
     public class CustomComponent
     {
-        public string Codice { get; set; }
+        //public int CarelloId { get; set; }
+        public string ComponenteId { get; set; }
         public int Qty { get; set; }
     }
 }

@@ -47,46 +47,44 @@ namespace Onit.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveArrivo(
-            string CodiceLocazione, string AreaId, string Matricola, string Descrizione,
-            string Identificativo, CustomComponent[] CustomComponent)
+        public async Task<ActionResult> Json ([FromBody] DbViewArriviComponente dbView)
         {
             string result = "Error! c'è un problema!";
-            if (!string.IsNullOrEmpty(Matricola) && !string.IsNullOrEmpty(Descrizione) &&
-                    CustomComponent != null && !string.IsNullOrEmpty(Identificativo) &&
-                    !string.IsNullOrEmpty(CodiceLocazione) && !string.IsNullOrEmpty(AreaId))
+            if (!string.IsNullOrEmpty(dbView.Matricola) && !string.IsNullOrEmpty(dbView.Descrizione) &&
+                    dbView.ComponenteCarello != null && !string.IsNullOrEmpty(dbView.Identificativo) &&
+                    !string.IsNullOrEmpty(dbView.CodiceLocazione) && dbView.AreaId !=0)
             {
                 Carello carello = new Carello();
-                carello.Matricola = Matricola;
+                carello.Matricola = dbView.Matricola;
                 _context.Carelli.Add(carello);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 int idCarello = carello.Id;
 
                 //Aggiungere un controllo per sapere se la locazione esiste già
                 Locazione locazione = new Locazione();
-                locazione.Codice = CodiceLocazione;
-                locazione.AreaId = int.Parse(AreaId);
+                locazione.Codice = dbView.CodiceLocazione;
+                locazione.AreaId = dbView.AreaId;
                 _context.Locazioni.Add(locazione);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 int locazioneId = locazione.Id;
 
                 Arrivi arrivi = new Arrivi();
-                arrivi.Identificativo = Identificativo;
-                arrivi.Descrizione = Descrizione;
+                arrivi.Identificativo = dbView.Identificativo;
+                arrivi.Descrizione = dbView.Descrizione;
                 arrivi.Date = DateTime.Now;
                 arrivi.CarelloId = idCarello;
                 arrivi.LocazioneId = locazioneId;
                 _context.Arrivi.Add(arrivi);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 ComponenteDelCarello cdc;
                 Componente compo;
-                foreach (var item in CustomComponent)
+                foreach (var item in dbView.ComponenteCarello)
                 {
                     cdc = new ComponenteDelCarello();
-                    compo = _context.Componente.FirstOrDefault(c => c.Codice == item.Codice);
+                    compo = _context.Componente.FirstOrDefault(c => c.Codice == item.ComponenteId);
                     cdc.ComponenteId = compo.Id;
                     cdc.CarelloId = idCarello;
                     cdc.Qty = item.Qty;
@@ -234,20 +232,49 @@ namespace Onit.Controllers
             return View(componenteDelCarello);
         } */
 
+
+      /*  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> json(ComponenteDelCarello componenteDelCarello)
+        public async Task<IActionResult> json([FromBody]CustomComponent customComponent)
         {
+            ComponenteDelCarello componenteDelCarello = new ComponenteDelCarello();
+            componenteDelCarello.ComponenteId = _context.Componente.FirstOrDefault
+                                                (c => c.Codice == customComponent.ComponenteId).Id;
+            //componenteDelCarello.CarelloId = customComponent.CarelloId;
+            componenteDelCarello.Qty = customComponent.Qty;
             if (ModelState.IsValid)
             {
-                _context.Add(componenteDelCarello);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var esiste = await _context.ComponentiDeiCarelli
+                                .FindAsync(componenteDelCarello.CarelloId, componenteDelCarello.ComponenteId);
+                try
+                {
+                    if(esiste != null)
+                    {
+                        esiste.Qty += componenteDelCarello.Qty;
+                        _context.ComponentiDeiCarelli.Update(esiste);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        _context.ComponentiDeiCarelli.Add(componenteDelCarello);
+                        await _context.SaveChangesAsync();
+                    }
+                    return View();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
             }
             ViewData["CarelloId"] = new SelectList(_context.Carelli, "Id", "Matricola", componenteDelCarello.CarelloId);
             ViewData["ComponenteId"] = new SelectList(_context.Componente, "Id", "Codice", componenteDelCarello.ComponenteId);
-            return View(componenteDelCarello);
+            return RedirectToAction(nameof(Create));
         }
+
+    */
+
 
         // GET: Arrivis/Create
         public IActionResult Create()

@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Onit.Models.Arrivi>
+
+@Html.AntiForgeryToken()
+
 <br />
 <br />
 <div class="panel panel-default">
@@ -21,11 +24,14 @@
                 <table class="table table-striped table-responsive">
                     <tbody>
                         <tr>
-                            <td>Data arrivo : @item.Date</td>
+                            <td>Data arrivo : @item.Date </td>
                             <td>Codice identificativo : @item.Identificativo </td>
+                        </tr>
+                        <tr>
                             <td>Descrizione : @item.Descrizione </td>
                             <td>Matricola carello : @item.Carello.Matricola</td>
                         </tr>
+                        
                         <tr>
                             <td colspan="3">
                                 <table class="table table-bordered">
@@ -46,6 +52,7 @@
                                 </table>
                             </td>
                         </tr>
+                        <br />
                     </tbody>
                 </table>
             </div>
@@ -123,7 +130,7 @@
                                     <select id="ComponenteCodice" name="ComponenteCodice" class="form-control" asp-items="ViewBag.ComponenteId">
                                     </select>
                                 </div>
-                            </div>                           
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2">

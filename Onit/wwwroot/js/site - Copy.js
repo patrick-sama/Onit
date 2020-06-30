@@ -47,8 +47,7 @@ ajaxPost = form => {
 function addNewOrder() {
     $("#newOrderModal").modal();
 }
-
-//Aggiunta di piu componente.
+//Add Multiple Order.
 $("#addToList").click(function (e) {
     e.preventDefault();
 
@@ -62,12 +61,12 @@ $("#addToList").click(function (e) {
     detailsTableBody.append(componente);
     clearItem();
 });
-// Add A New Component In The List, Clear Clean The Form For Add More items.
+//After Add A New Order In The List, Clear Clean The Form For Add More Order.
 function clearItem() {
     $("#ComponenteCodice").val('');
     $("#quantity").val('');
 }
-//  Add/Remove A New Component In The List
+// After Add A New Order In The List, If You Want, You Can Remove It.
 $(document).on('click', 'a.deleteItem', function (e) {
     e.preventDefault();
     var $self = $(this);
@@ -77,21 +76,14 @@ $(document).on('click', 'a.deleteItem', function (e) {
         });
     }
 });
-
-
 //After Click Save Button Pass All Data View To Controller For Save Database
-function SalvaComponenteCarello(data) {
-    var t = $("input[name='__RequestVerificationToken']").val();
+function saveOrder(data) {
     return $.ajax({
         contentType: 'application/json',
         dataType: 'json',
         type: 'POST',
-        url: "/Arrivis/json",
-        data: data,
-        headers:
-        {
-            "RequestVerificationToken": t
-        },
+        url: "/Arrivis/AddComp",
+        data: JSON.stringify(data),
         success: function (result) {
             alert(result);
             location.reload();
@@ -102,7 +94,8 @@ function SalvaComponenteCarello(data) {
     });
 }
 
-//Collect Multiple Component in the List to Pass them To Controller
+/*
+//Collect Multiple Order List For Pass To Controller
 $("#saveOrder").click(function (e) {
     e.preventDefault();
 
@@ -111,40 +104,30 @@ $("#saveOrder").click(function (e) {
 
     $.each($("#detailsTable tbody tr"), function () {
         componenteDelCar.push({
-            ComponenteId: $(this).find('td:eq(0)').html(),
-            Qty: parseInt($(this).find('td:eq(1)').html()),
+            Codice: $(this).find('td:eq(0)').html(),
+            Qty: $(this).find('td:eq(1)').html(),
         });
     });
 
 
     var data = JSON.stringify({
         CodiceLocazione: $("#Locazione").val(),
-        AreaId: parseInt($("#Area").val()),
+        AreaId: $("#Area").val(),
         Matricola: $("#Matricola").val(),
         Descrizione: $("#Descrizione").val(),
         Identificativo: $("#Identificativo").val(),
-        ComponenteCarello: componenteDelCar
+        CustomComponent: componenteDelCar
     });
 
-    $.when(SalvaComponenteCarello(data)).then(function (response) {
+    $.when(saveOrder(data)).then(function (response) {
         console.log(response);
     }).fail(function (err) {
         console.log(err);
     });
 });
+*/
 
 
-
-
-
-
-
-
-
-
-
-//////////////////////////////////////////
-/*
 $("#saveOrder").click(function (e) {
     e.preventDefault();
     var data;
@@ -181,4 +164,4 @@ function SalvaComponenteCarello(data) {
             console.log(data);
         }
     });
-}  */
+}
