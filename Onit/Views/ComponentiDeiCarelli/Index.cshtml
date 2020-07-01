@@ -25,7 +25,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderBy(m=>m.Carello.Matricola)) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Qty)
