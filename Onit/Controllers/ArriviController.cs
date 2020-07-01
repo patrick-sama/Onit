@@ -88,6 +88,7 @@ namespace Onit.Controllers
                 Arrivi arrivi = _context.Arrivi.Find(idCarello,locazioneId);
                 if (arrivi == null)
                 {
+                    arrivi = new Arrivi();
                     arrivi.Identificativo = dbView.Identificativo;
                     arrivi.Descrizione = dbView.Descrizione;
                     arrivi.Date = DateTime.Now;
