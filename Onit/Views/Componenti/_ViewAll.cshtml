@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Onit.Models.Componente>
+
+<h1 class="text-center"> Catalogo dei Componenti</h1>
+
+<p class="text-center">
+    <a onclick="showInPopup('@Url.Action("AddOrEdit","Componenti",null,Context.Request.Scheme)','New Component') " class="btn btn-success"> Nuova Componente </a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descrizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descrizione)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Componentes",new { id=item.Id},Context.Request.Scheme)','Edit Component') " class="btn btn-info"> Edit </a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return Delete(this)" class="d-inline">
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                    </form>                
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Onit.Models.Arrivi>
+
+@Html.AntiForgeryToken()
+
+<br />
+<br />
+<div class="panel panel-default">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="panel-heading">
+        <div class="row">
+            <h2 class="panel-title pull-left" style="margin-left:10px;">
+                <strong>Detaglio Arrivi</strong>
+            </h2>
+            <button style="margin-right:10px" class="btn btn-primary pull-right" onclick="AperturaModal()">Nuovo arrivo</button>
+        </div>
+    </div>
+
+    @*Receive All Database Data From Controller And Display Those Data In Client Side*@
+
+    @if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="panel-body">
+                <table class="table table-striped table-responsive">
+                    <tbody>
+                        <tr>
+                            <td><b>Data arrivo :</b> @item.Date </td>
+                            <td><b>Codice identificativo :</b> @item.Identificativo </td>
+                        </tr>
+                        <tr>
+                            <td> <b> Descrizione :</b> @item.Descrizione </td>
+                            <td> <b> Matricola carello :</b> @item.Carello.Matricola</td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="3">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Componente</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                        @foreach (var order in item.Carello.ComponentiDelCarello)
+                                        {
+                                            <tr>
+                                                <td>@order.Componente.Codice</td>
+                                                <td>@order.Qty</td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <br />
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="panel-body">
+            <h3 style="color:red;">vuoto!</h3>
+        </div>
+
+    }
+</div>
+
+
+@*Gestione degli arrivi*@
+<div class="modal fade" id="nuovoArrivoModal">
+    <div class="modal-dialog modal-lg" style=" width: 900px !important;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>Aggiungere arrivo</h4>
+            </div>
+            <form id="NuovoArrivoForm" name="ArriviForm">
+                <div class="modal-body">
+                    @*Detagli Arrivo*@
+                    <h5 style="color:#ff6347">Detagli Arrivo</h5>
+                    <hr />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="CarelloId" />
+                        <div class="form-group">
+                            <label class="control-label col-md-4">
+                                Identificativo arrivo
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" id="Identificativo" name="Identificativo" placeholder="Identificativo arrivo" class="form-control" required />
+                            </div><br />
+                            <label class="control-label col-md-4">
+                                Matricola Carello
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" id="Matricola" name="Matricola" placeholder="Matricola Carello" class="form-control" required />
+                            </div><br />
+                            <label class="control-label col-md-4">
+                                Descrizione arrivo
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" id="Descrizione" name="Descrizione" placeholder="Descrizione arrivo" class="form-control" required />
+                            </div> <br />
+                            <div class="col-md-4">
+                                <label class="control-label col-md-2"> Area </label>
+                                <select id="Area" name="Area" class="form-control" asp-items="ViewBag.AreaId" required></select>
+                            </div> <br />
+                            <label class="control-label col-md-4">
+                                Codice Locazione
+                            </label>
+                            <div class="col-md-4">
+                                <input type="text" id="Locazione" name="Locazione" placeholder="Codice Locazione" class="form-control" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Detagli Carello*@
+                    <h5 style="margin-top:10px;color:#ff6347">Detagli Carello</h5>
+                    <hr />
+                    <div class="form-horizontal">
+                        <input type="hidden" id="ComponenteId" />
+                        <div class="form-group">
+                            <label class="control-label col-md-4">
+                                Codice Componente
+                            </label>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select id="ComponenteCodice" name="ComponenteCodice" class="form-control" asp-items="ViewBag.ComponenteId">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label col-md-2">
+                                Quantity
+                            </label>
+                            <div class="col-md-4">
+                                <input type="number" id="quantity" name="quantity" placeholder="Quantity" class="form-control" />
+                            </div>
+                            <div class="col-md-2 col-lg-offset-4">
+                                <a id="addToList" class="btn btn-primary">Add To List</a>
+                            </div>
+                        </div>
+
+                        <table id="detailsTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:45%">Componente</th>
+                                    <th style="width:30%">Quantity</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                    <button id="SubmitArrivo" type="submit" class="btn btn-danger" >Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

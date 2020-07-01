@@ -27,7 +27,6 @@ ajaxPost = form => {
                 }
                 else {
                     $('#form-modal .modal-body').html(res.html);
-                    //$('#form-modal').modal('hide');
                 }
                  
             },
@@ -44,8 +43,8 @@ ajaxPost = form => {
 
 
 //Show Modal.
-function addNewOrder() {
-    $("#newOrderModal").modal();
+function AperturaModal() {
+    $("#nuovoArrivoModal").modal();
 }
 
 //Aggiunta di piu componente.
@@ -86,7 +85,7 @@ function SalvaComponenteCarello(data) {
         contentType: 'application/json',
         dataType: 'json',
         type: 'POST',
-        url: "/Arrivis/json",
+        url: "/Arrivi/json",
         data: data,
         headers:
         {
@@ -103,7 +102,32 @@ function SalvaComponenteCarello(data) {
 }
 
 //Collect Multiple Component in the List to Pass them To Controller
-$("#saveOrder").click(function (e) {
+$("#SubmitArrivo").click(function (e) {
+    //validation
+        $("form[name='ArriviForm']").validate({
+            // Specify validation rules
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                Identificativo: "required",
+                Matricola: "required",
+                Descrizione: "required",
+                Locazione: "required"
+            },
+            // Specify validation error messages
+            messages: {
+                Identificativo: "Inserimento del codice identificativo obligatorio",
+                Matricola: "Inserimento della matricola obligatorio",
+                Descrizione: "Inserimento di una descrizione obligatorio",
+                Locazione: "Inserimento della locazione obligatorio",
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
     e.preventDefault();
 
     var componenteDelCar = [];
@@ -136,16 +160,9 @@ $("#saveOrder").click(function (e) {
 
 
 
-
-
-
-
-
-
-
 //////////////////////////////////////////
 /*
-$("#saveOrder").click(function (e) {
+$("#SubmitArrivo").click(function (e) {
     e.preventDefault();
     var data;
 
