@@ -45,6 +45,34 @@ namespace Onit.Controllers
             return View(locazione);
         }
 
+        // GET: Locazioni/Aree
+        public async Task<IActionResult> Aree()
+        {
+            return View(await _context.Aree.ToListAsync());
+        }
+
+        // GET: Locazioni/CreateArea
+        public IActionResult CreateArea()
+        {
+            return View();
+        }
+
+        // POST: Areas/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateArea([Bind("Id,Codice")] Area area)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(area);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(area);
+        }
+
         // GET: Locaziones/Create
         public IActionResult Create()
         {

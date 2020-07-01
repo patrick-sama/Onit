@@ -20,7 +20,7 @@ namespace Onit.Controllers
         }
 
         // GET: Areas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Aree()
         {
             return View(await _context.Aree.ToListAsync());
         }
@@ -44,7 +44,7 @@ namespace Onit.Controllers
         }
 
         // GET: Areas/Create
-        public IActionResult Create()
+        public IActionResult CreateArea()
         {
             return View();
         }
@@ -54,7 +54,7 @@ namespace Onit.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Codice")] Area area)
+        public async Task<IActionResult> CreateArea([Bind("Id,Codice")] Area area)
         {
             if (ModelState.IsValid)
             {

@@ -26,6 +26,21 @@ namespace Onit.Controllers
             return View(await onitContext.ToListAsync());
         }
 
+        // GET: Giacenza
+        public async Task<IActionResult> Giacenza()
+        {
+            ViewBag.Locazione = await _context.Arrivi.Include(a => a.Carello)
+                                                    .Include(a => a.Locazione)
+                                                    .Include(a => a.Locazione.Area).ToListAsync();
+            var carelli = await _context.ComponentiDeiCarelli
+                        .Include(c => c.Componente)
+                        .Include(c => c.Carello)
+                        .Include(s => s.Carello.Arrivi)
+                        .ToListAsync();
+
+            return View(carelli);
+        }
+
         // GET: ComponenteDelCarelloes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

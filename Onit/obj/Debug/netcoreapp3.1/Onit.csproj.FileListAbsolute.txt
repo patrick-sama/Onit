@@ -347,15 +347,9 @@ C:\Users\Hadok\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcorea
 C:\Users\Hadok\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Edit.cshtml.g.cs
 C:\Users\Hadok\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Index.cshtml.g.cs
 C:\Users\Hadok\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Arrivi\InserimentoArrivo.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Aree\Create.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Aree\Delete.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Aree\Details.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Aree\Edit.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Aree\Index.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Arrivi\Edit.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Arrivi\Index.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Arrivi\InserimentoArrivo.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Carelli\Index.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponentiDeiCarelli\Create.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponentiDeiCarelli\Delete.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponentiDeiCarelli\Details.cshtml.g.cs
@@ -365,8 +359,10 @@ C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreap
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componenti\Delete.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componenti\Index.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Componenti\_ViewAll.cshtml.g.cs
-C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Create.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Delete.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Details.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Edit.cshtml.g.cs
 C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Index.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\ComponentiDeiCarelli\Giacenza.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\CreateArea.cshtml.g.cs
+C:\Users\user\Documents\Visual Studio 2019\Project\Onit\Onit\obj\Debug\netcoreapp3.1\Razor\Views\Locazioni\Aree.cshtml.g.cs

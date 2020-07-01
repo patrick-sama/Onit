@@ -51,7 +51,7 @@ namespace Onit
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Carelli}/{action=Index}/{id?}");
+                    pattern: "{controller=ComponentiDeiCarelli}/{action=Giacenza}/{id?}");
             });
         }
     }
