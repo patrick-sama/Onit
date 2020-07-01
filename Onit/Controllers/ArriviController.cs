@@ -28,6 +28,8 @@ namespace Onit.Controllers
             ViewData["AreaId"] = new SelectList(areaList, "Id", "Codice");
             return View(await onitContext.ToListAsync());
         }
+
+        // GET : InserimentoArrivo
         public ActionResult InserimentoArrivo()
         {
             ViewData["LocazioneId"] = new SelectList(
@@ -44,7 +46,7 @@ namespace Onit.Controllers
             return View(arrivi);
         }
 
-
+        // POST  di un inserimento
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Json ([FromBody] DbViewArriviComponente dbView)
@@ -54,16 +56,24 @@ namespace Onit.Controllers
                     dbView.ComponenteCarello != null && !string.IsNullOrEmpty(dbView.Identificativo) &&
                     !string.IsNullOrEmpty(dbView.CodiceLocazione) && dbView.AreaId !=0)
             {
-                Carello carello = new Carello();
-                carello.Matricola = dbView.Matricola;
-                _context.Carelli.Add(carello);
-                await _context.SaveChangesAsync();
 
+                //controllo per sapere se il carello esiste già
+                Carello carello = _context.Carelli.FirstOrDefault(c => c.Matricola == dbView.Matricola);
+
+                //se non esiste lo aggiungiamo
+                if(carello == null)
+                {
+                    carello = new Carello();
+                    carello.Matricola = dbView.Matricola;
+                    _context.Carelli.Add(carello);
+                    await _context.SaveChangesAsync();
+                }
                 int idCarello = carello.Id;
 
-                //Aggiungere un controllo per sapere se la locazione esiste già
+                //controllo per sapere se la locazione esiste già
                 Locazione locazione = _context.Locazioni.FirstOrDefault(l => l.AreaId == dbView.AreaId
                                                                         && l.Codice == dbView.CodiceLocazione);
+                //se non esiste la aggiungiamo 
                 if (locazione == null)
                 {
                     locazione = new Locazione();
@@ -74,15 +84,24 @@ namespace Onit.Controllers
                 }               
                 int locazioneId = locazione.Id;
 
-                Arrivi arrivi = new Arrivi();
-                arrivi.Identificativo = dbView.Identificativo;
-                arrivi.Descrizione = dbView.Descrizione;
-                arrivi.Date = DateTime.Now;
-                arrivi.CarelloId = idCarello;
-                arrivi.LocazioneId = locazioneId;
-                _context.Arrivi.Add(arrivi);
-                await _context.SaveChangesAsync();
+                //Verifica se è gia stato effetuato questa accetazione
+                Arrivi arrivi = _context.Arrivi.Find(idCarello,locazioneId);
+                if (arrivi == null)
+                {
+                    arrivi.Identificativo = dbView.Identificativo;
+                    arrivi.Descrizione = dbView.Descrizione;
+                    arrivi.Date = DateTime.Now;
+                    arrivi.CarelloId = idCarello;
+                    arrivi.LocazioneId = locazioneId;
+                    _context.Arrivi.Add(arrivi);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    //manda in error 500 se si cerca di inserire un carello gia presente e una locazione gia presente
+                }
 
+                //aggiornamento delle componente di questo carello
                 ComponenteDelCarello cdc;
                 Componente compo;
                 foreach (var item in dbView.ComponenteCarello)
@@ -101,47 +120,6 @@ namespace Onit.Controllers
         }
       
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveArrivi(CustomArriviViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    Carello carello = new Carello();
-                    carello.Matricola = model.MatricolaCarello;
-                    _context.Carelli.Add(carello);
-                    await _context.SaveChangesAsync();
-
-                    int idCarello = carello.Id;
-
-                    //Aggiungere un controllo per sapere se la locazione esiste già
-                    Locazione locazione = new Locazione();
-                    locazione.Codice = model.CodiceLocazione;
-                    locazione.AreaId = model.AreaId;
-
-                    _context.Locazioni.Add(locazione);
-                    await _context.SaveChangesAsync();
-
-                    int locazioneId = locazione.Id;
-
-                    Arrivi arrivi = new Arrivi();
-                    arrivi.Identificativo = model.Identificativo;
-                    arrivi.Descrizione = model.Descrizione;
-                    arrivi.Date = model.Date;
-                    arrivi.CarelloId = idCarello;
-                    arrivi.LocazioneId = locazioneId;
-                    _context.Arrivi.Add(arrivi);
-                    await _context.SaveChangesAsync();
-
-
-                    return RedirectToAction("AddComponente",new { id =idCarello });
-                }
-                catch (Exception ex){ throw ex;}
-            }        
-            return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "Create", model) });
-        }
 
         // GET: Arrivis/Details/5
         public async Task<IActionResult> Details(int? CarelloId, int? LocazioneId)
@@ -166,49 +144,6 @@ namespace Onit.Controllers
             ViewData["ComponenteId"] = new SelectList(_context.Componente, "Id", "Codice");
             return View();
         }
-
-      /*  
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> json([FromBody]CustomComponent customComponent)
-        {
-            ComponenteDelCarello componenteDelCarello = new ComponenteDelCarello();
-            componenteDelCarello.ComponenteId = _context.Componente.FirstOrDefault
-                                                (c => c.Codice == customComponent.ComponenteId).Id;
-            //componenteDelCarello.CarelloId = customComponent.CarelloId;
-            componenteDelCarello.Qty = customComponent.Qty;
-            if (ModelState.IsValid)
-            {
-                var esiste = await _context.ComponentiDeiCarelli
-                                .FindAsync(componenteDelCarello.CarelloId, componenteDelCarello.ComponenteId);
-                try
-                {
-                    if(esiste != null)
-                    {
-                        esiste.Qty += componenteDelCarello.Qty;
-                        _context.ComponentiDeiCarelli.Update(esiste);
-                        await _context.SaveChangesAsync();
-                    }
-                    else
-                    {
-                        _context.ComponentiDeiCarelli.Add(componenteDelCarello);
-                        await _context.SaveChangesAsync();
-                    }
-                    return View();
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                
-            }
-            ViewData["CarelloId"] = new SelectList(_context.Carelli, "Id", "Matricola", componenteDelCarello.CarelloId);
-            ViewData["ComponenteId"] = new SelectList(_context.Componente, "Id", "Codice", componenteDelCarello.ComponenteId);
-            return RedirectToAction(nameof(Create));
-        }
-
-    */
-
 
         // GET: Arrivis/Create
         public IActionResult Create()
